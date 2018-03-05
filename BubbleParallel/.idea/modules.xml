@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/BubbleParallel.iml" filepath="$PROJECT_DIR$/BubbleParallel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../FastParallel/FastParallel.iml" filepath="$PROJECT_DIR$/../FastParallel/FastParallel.iml" />
+    </modules>
+  </component>
+</project>
