@@ -9,11 +9,12 @@ public class IntQuicksort {
 
     }
 
-    public static void sort(int[] array) {
+    public static void sort(Integer[] array) {
         sort(array, 0, array.length);
     }
 
-    public static void sort(int[] array, int fromIndex, int toIndex) {
+    @SuppressWarnings("Duplicates")
+    public static void sort(Integer[] array, int fromIndex, int toIndex) {
         while (true) {
             int rangeLength = toIndex - fromIndex;
 
@@ -62,7 +63,7 @@ public class IntQuicksort {
         }
     }
 
-    private static void insertionsort(int[] array, int fromIndex, int toIndex) {
+    private static void insertionsort(Integer[] array, int fromIndex, int toIndex) {
         for (int i = fromIndex + 1; i < toIndex; ++i) {
             int current = array[i];
             int j = i  - 1;
@@ -76,49 +77,41 @@ public class IntQuicksort {
         }
     }
 
-    private static final int SIZE = 500_000;
-    private static final int FROM = 100;
-    private static final int TO = SIZE - 100;
+    private static final int SIZE = 50000;
+    private static final int FROM = 0;
+    private static final int TO = SIZE;
 
     public static void main(String[] args) {
         long seed = System.nanoTime();
         Random random = new Random(seed);
-        int[] array1 = getRandomArray(SIZE, 0, 1_000_000_000, random);
-        int[] array2 = array1.clone();
-        int[] array3 = array1.clone();
+        Integer[] array1 = getRandomArray(SIZE, 1, 100000000, random);
+        Integer[] array2 = array1.clone();
+//        int[] array3 = array1.clone();
 
-        System.out.println("Seed: " + seed);
         long startTime = System.nanoTime();
         IntQuicksort.sort(array1, FROM, TO);
         long endTime = System.nanoTime();
 
-        System.out.printf("IntQuicksort.sort in %.2f milliseconds.\n",
+        System.out.printf("No parallel : %.2f milliseconds.\n",
                 (endTime - startTime) / 1e6);
 
         startTime = System.nanoTime();
         ParallelIntQuicksort.sort(array2, FROM, TO);
         endTime = System.nanoTime();
 
-        System.out.printf("ParallelIntQuicksort.sort in %.2f milliseconds.\n",
+        System.out.printf("Parallel : %.2f milliseconds.\n",
                 (endTime - startTime) / 1e6);
 
-        startTime = System.nanoTime();
-        Arrays.sort(array3, FROM, TO);
-        endTime = System.nanoTime();
+        boolean isArraysEquals = Arrays.equals(array1, array2);
 
-        System.out.printf("Arrays.sort in %.2f milliseconds.\n",
-                (endTime - startTime) / 1e6);
-
-        System.out.println("Arrays are equal: " +
-                (Arrays.equals(array1, array2) &&
-                        Arrays.equals(array2, array3)));
+        System.out.println("ArraysEquals? = " + isArraysEquals);
     }
 
-    public static int[] getRandomArray(int size,
+    public static Integer[] getRandomArray(int size,
                                        int minimum,
                                        int maximum,
                                        Random random) {
-        int[] array = new int[size];
+        Integer[] array = new Integer[size];
 
         for (int i = 0; i < size; ++i) {
             array[i] = random.nextInt(maximum - minimum + 1) + minimum;

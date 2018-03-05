@@ -2,11 +2,11 @@ public class ParallelIntQuicksort {
 
     private static final int MINIMUM_THREAD_WORKLOAD = 131_072;
 
-    public static void sort(int[] array) {
+    public static void sort(Integer[] array) {
         sort(array, 0, array.length);
     }
 
-    public static void sort(int[] array, int fromIndex, int toIndex) {
+    public static void sort(Integer[] array, int fromIndex, int toIndex) {
         int rangeLength = toIndex - fromIndex;
         int cores = Math.min(rangeLength / MINIMUM_THREAD_WORKLOAD,
                 Runtime.getRuntime().availableProcessors());
@@ -20,7 +20,8 @@ public class ParallelIntQuicksort {
 
     }
 
-    private static void sortImpl(int[] array,
+    @SuppressWarnings("Duplicates")
+    private static void sortImpl(Integer[] array,
                                  int fromIndex,
                                  int toIndex,
                                  int cores) {
@@ -81,12 +82,12 @@ public class ParallelIntQuicksort {
 
     private static final class ParallelQuicksortThread extends Thread {
 
-        private final int[] array;
+        private final Integer[] array;
         private final int fromIndex;
         private final int toIndex;
         private final int cores;
 
-        ParallelQuicksortThread(int[] array,
+        ParallelQuicksortThread(Integer[] array,
                                 int fromIndex,
                                 int toIndex,
                                 int cores) {
