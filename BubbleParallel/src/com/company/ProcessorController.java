@@ -6,8 +6,8 @@ public class ProcessorController {
 
     private static ProcessorController self = null;
 
-    private static final int DEFAULT_PROCESSOR_COUNT = 4;
-    private static final int DEFAULT_ARRAY_LENGTH = 32;
+    private static final int DEFAULT_PROCESSOR_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int DEFAULT_ARRAY_LENGTH = 50000;
 
     private Processor[] processors;
     private int[] array;
@@ -83,10 +83,12 @@ public class ProcessorController {
         int pcWorkTime = 0;
         for (Processor processor : processors) {
             pcWorkTime += processor.getWorkTime();
-            System.out.println("ID: " + processor.getProcessorID() +
-                    "\nWork time: " + processor.getWorkTime() + "ms");
+//            System.out.println("ID: " + processor.getProcessorID() +
+//                    "\nWork time: " + processor.getWorkTime() + "ms");
         }
-        System.out.println("-------\nWork time: " + pcWorkTime + "ms");
+//        System.out.println("-------\nWork time: " + pcWorkTime + "ms");
+        System.out.println("Параллельная сортировка: " + pcWorkTime + "ms");
+
     }
 
     private final int[] splitArray(int processorID, boolean isOdd){

@@ -9,7 +9,7 @@ public class Main {
         ProcessorController pc = null;
 
         if(args.length != 2)
-            pc = ProcessorController.getInstance(4, 10000);
+            pc = ProcessorController.getInstance();
         else
             pc = ProcessorController.getInstance(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
 
@@ -36,7 +36,8 @@ public class Main {
 
         long end = new GregorianCalendar().getTimeInMillis();
 
-        System.out.println("Work time: " + ((int)(end - start)) + "ms");
+        System.out.println("Обычная сортировка: " + ((int)(end - start)) + "ms");
+        System.out.println("-------");
 
         return arr;
     }
